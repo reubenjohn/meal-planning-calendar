@@ -62,6 +62,67 @@ function isValidDay(day) {
     return days.includes(day);
 }
 
+function renderGrid() {
+    const grid = document.getElementById('main-grid');
+    if (!grid) return;
+    
+    grid.innerHTML = '';
+
+    // First row: empty cell + day headers
+    const emptyCell = document.createElement('div');
+    grid.appendChild(emptyCell);
+    
+    days.forEach((day, dayIndex) => {
+        const header = document.createElement('div');
+        header.className = 'day-header';
+        
+        // Check if this day is a cook day (Saturday=0, Tuesday=3)
+        const isCookDay = dayIndex === 0 || dayIndex === 3;
+        header.textContent = isCookDay ? `🧑‍🍳 ${day}` : day;
+        
+        grid.appendChild(header);
+    });
+
+    // Four rows: one for each week
+    for (let week = 1; week <= 4; week++) {
+        // Week header
+        const weekHeader = document.createElement('div');
+        weekHeader.className = 'week-header';
+        weekHeader.textContent = `Week ${week}`;
+        grid.appendChild(weekHeader);
+
+        // Day cards for this week
+        days.forEach(day => {
+            const dayData = mealData[week][day];
+            const card = document.createElement('div');
+            card.className = 'day-card';
+            if (dayData.cook) card.classList.add('cook-day');
+
+            let content = '';
+
+            if (dayData.lunch !== '—') {
+                content += `<div class="meal-item lunch">${dayData.lunch}</div>`;
+            }
+            
+            if (dayData.dinner !== '—') {
+                content += `<div class="meal-item dinner">${dayData.dinner}</div>`;
+            }
+
+            card.innerHTML = content;
+            grid.appendChild(card);
+        });
+    }
+}
+
+// Initialize when DOM is ready
+if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderGrid);
+    } else {
+        renderGrid();
+    }
+}
+
 // Export for Node.js testing
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -71,6 +132,7 @@ if (typeof module !== 'undefined' && module.exports) {
         getCookDays,
         getAllMealsForWeek,
         isValidWeek,
-        isValidDay
+        isValidDay,
+        renderGrid
     };
 }
