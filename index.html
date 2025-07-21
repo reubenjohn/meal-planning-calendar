@@ -475,16 +475,32 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                overflow-x: auto;
+            }
+            
             .main-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
+                grid-template-columns: 60px repeat(7, minmax(120px, 1fr));
+                gap: 6px;
+                min-width: 900px;
             }
             
             .week-header {
-                writing-mode: horizontal-tb;
+                writing-mode: vertical-lr;
                 text-orientation: mixed;
+                padding: 8px 4px;
+                font-size: 0.8rem;
+            }
+            
+            .day-header {
                 padding: 8px;
-                text-align: center;
+                font-size: 0.8rem;
+            }
+            
+            .day-card {
+                min-height: 80px;
+                padding: 6px;
+                font-size: 0.75rem;
             }
             
             .tab-navigation {
@@ -513,6 +529,23 @@
             
             body {
                 padding: 10px;
+            }
+            
+            /* Show horizontal scroll hint */
+            .main-grid::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                width: 20px;
+                height: 20px;
+                background: linear-gradient(45deg, transparent 40%, var(--text-secondary) 40%, var(--text-secondary) 60%, transparent 60%);
+                opacity: 0.3;
+                pointer-events: none;
+            }
+            
+            .container {
+                position: relative;
             }
         }
     </style>
