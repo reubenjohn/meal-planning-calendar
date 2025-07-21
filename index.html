@@ -6,16 +6,19 @@
     <title>Meal Planning Calendar</title>
     <style>
         :root {
-            --bg-primary: #faf9f7;
-            --bg-secondary: #f5f4f2;
+            --bg-primary: #fdfcfa;
+            --bg-secondary: #f8f6f4;
             --text-primary: #2d3748;
-            --text-secondary: #4a5568;
-            --accent-soft: #e2e8f0;
-            --accent-warm: #fed7d7;
-            --accent-cool: #bee3f8;
-            --accent-green: #c6f6d5;
-            --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
-            --border-soft: 1px solid #e2e8f0;
+            --text-secondary: #5a6270;
+            --accent-soft: #e8e5e0;
+            --accent-warm: #ffeaa7;
+            --accent-cool: #dde4ff;
+            --accent-green: #d4f4dd;
+            --accent-pink: #ffd3e1;
+            --accent-lavender: #e6e6fa;
+            --shadow-soft: 0 3px 12px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.08);
+            --border-soft: 1px solid #e8e5e0;
         }
 
         * {
@@ -26,10 +29,11 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-primary);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #f9f7f4 100%);
             color: var(--text-primary);
             line-height: 1.6;
             padding: 20px;
+            min-height: 100vh;
         }
 
         .container {
@@ -40,9 +44,16 @@
         h1 {
             text-align: center;
             margin-bottom: 30px;
-            font-size: 2rem;
-            font-weight: 600;
+            font-size: 2.2rem;
+            font-weight: 300;
             color: var(--text-primary);
+            letter-spacing: 0.5px;
+            animation: gentlePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         .grid-wrapper {
@@ -78,21 +89,37 @@
         }
 
         .day-card {
-            background: white;
-            border-radius: 8px;
-            padding: 10px;
+            background: linear-gradient(145deg, #ffffff 0%, #fefefe 100%);
+            border-radius: 12px;
+            padding: 12px;
             min-height: 100px;
             box-shadow: var(--shadow-soft);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
             font-size: 0.85rem;
+            position: relative;
+            animation: gentleFloat 4s ease-in-out infinite;
+            animation-delay: var(--animation-delay, 0s);
         }
 
         .day-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-hover);
             border-color: var(--accent-soft);
+        }
+        
+        .day-card:nth-child(odd) {
+            --animation-delay: 0.5s;
+        }
+        
+        .day-card:nth-child(even) {
+            --animation-delay: 1s;
+        }
+        
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-2px); }
         }
 
         .day-card.cook-day {
@@ -107,30 +134,55 @@
 
         .meal-item {
             background: var(--bg-secondary);
-            border-radius: 4px;
-            padding: 4px 8px;
-            margin: 3px 0;
+            border-radius: 16px;
+            padding: 6px 12px;
+            margin: 4px 0;
             font-size: 0.75rem;
             color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .meal-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .meal-item:hover::before {
+            left: 100%;
         }
 
         .meal-item.lunch {
-            background: var(--accent-green);
+            background: linear-gradient(135deg, var(--accent-green) 0%, #c8f2d4 100%);
+            color: #2d5a2d;
         }
 
         .meal-item.dinner {
-            background: var(--accent-cool);
+            background: linear-gradient(135deg, var(--accent-cool) 0%, #d0e1ff 100%);
+            color: #2d4a6b;
         }
 
         .cook-indicator {
-            background: var(--accent-warm);
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #ffdc7a 100%);
             color: var(--text-primary);
-            padding: 2px 8px;
-            border-radius: 12px;
+            padding: 3px 10px;
+            border-radius: 16px;
             font-size: 0.7rem;
             font-weight: 500;
             margin-bottom: 6px;
             display: inline-block;
+            animation: gentlePulse 2s ease-in-out infinite;
+            box-shadow: 0 2px 8px rgba(255, 234, 167, 0.3);
         }
 
         .legend {
@@ -333,29 +385,50 @@
         }
 
         .tab-btn {
-            background: var(--bg-secondary);
+            background: linear-gradient(145deg, var(--bg-secondary) 0%, #f4f2ef 100%);
             border: 2px solid var(--accent-soft);
-            border-radius: 8px;
-            padding: 12px 20px;
+            border-radius: 20px;
+            padding: 14px 24px;
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 400;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: var(--shadow-soft);
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%);
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .tab-btn:hover::before {
+            width: 200px;
+            height: 200px;
         }
 
         .tab-btn:hover {
-            background: var(--accent-soft);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            background: linear-gradient(145deg, var(--accent-soft) 0%, #e5e1dd 100%);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
         }
 
         .tab-btn.active {
-            background: var(--accent-cool);
+            background: linear-gradient(135deg, var(--accent-cool) 0%, #c8dcff 100%);
             border-color: #93c5fd;
             color: var(--text-primary);
-            font-weight: 600;
+            font-weight: 500;
+            transform: translateY(-2px);
         }
 
         .tab-content {
@@ -468,18 +541,36 @@
         }
 
         .lazy-recipe-card {
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            padding: 20px;
+            background: linear-gradient(145deg, var(--bg-secondary) 0%, #f6f4f1 100%);
+            border-radius: 16px;
+            padding: 24px;
             box-shadow: var(--shadow-soft);
             border-left: 4px solid var(--accent-green);
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lazy-recipe-card::before {
+            content: '✨';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: rotate(15deg) scale(0.5);
+            transition: all 0.3s ease;
         }
 
         .lazy-recipe-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px) rotate(0.5deg);
+            box-shadow: var(--shadow-hover);
             border-left-color: #68d391;
+        }
+        
+        .lazy-recipe-card:hover::before {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
         }
 
         .lazy-recipe-card h3 {
@@ -490,14 +581,16 @@
         }
 
         .prep-time {
-            background: var(--accent-green);
+            background: linear-gradient(135deg, var(--accent-pink) 0%, #ffb3d1 100%);
             color: var(--text-primary);
-            padding: 4px 12px;
-            border-radius: 16px;
+            padding: 6px 16px;
+            border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
             display: inline-block;
             margin-bottom: 12px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 8px rgba(255, 211, 225, 0.3);
         }
 
         .lazy-recipe-card p {
