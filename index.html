@@ -52,33 +52,6 @@
             position: relative;
         }
         
-        h1::before,
-        h1::after {
-            content: '✨';
-            position: absolute;
-            font-size: 1.5rem;
-            animation: floatSparkle 4s ease-in-out infinite;
-            opacity: 0.7;
-        }
-        
-        h1::before {
-            top: -10px;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        
-        h1::after {
-            top: 10px;
-            right: 15%;
-            animation-delay: 2s;
-        }
-        
-        @keyframes floatSparkle {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
-            25% { transform: translateY(-8px) rotate(90deg); opacity: 1; }
-            50% { transform: translateY(-4px) rotate(180deg); opacity: 0.8; }
-            75% { transform: translateY(-12px) rotate(270deg); opacity: 1; }
-        }
         
         @keyframes gentlePulse {
             0%, 100% { transform: scale(1); }
@@ -325,41 +298,6 @@
             opacity: 1;
         }
         
-        .modal.show .modal-content::before {
-            content: '✨';
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            font-size: 1.2rem;
-            animation: modalSparkle 1s ease-out;
-            pointer-events: none;
-        }
-        
-        .modal.show .modal-content::after {
-            content: '⭐';
-            position: absolute;
-            top: 12px;
-            left: 16px;
-            font-size: 1rem;
-            animation: modalSparkle 1s ease-out;
-            animation-delay: 0.3s;
-            pointer-events: none;
-        }
-        
-        @keyframes modalSparkle {
-            0% { 
-                opacity: 0; 
-                transform: scale(0) rotate(0deg); 
-            }
-            30% { 
-                opacity: 1; 
-                transform: scale(1.3) rotate(180deg); 
-            }
-            100% { 
-                opacity: 0; 
-                transform: scale(0.7) rotate(360deg); 
-            }
-        }
 
         .modal-header {
             display: flex;
@@ -633,33 +571,6 @@
             box-shadow: 0 2px 8px rgba(230, 230, 250, 0.3);
         }
         
-        .grocery-category h4::before {
-            content: '⭐';
-            position: absolute;
-            top: 4px;
-            right: 8px;
-            font-size: 0.8rem;
-            animation: sparkleRotate 5s linear infinite;
-            opacity: 0.6;
-        }
-        
-        .grocery-category h4::after {
-            content: '✨';
-            position: absolute;
-            top: 4px;
-            left: 8px;
-            font-size: 0.7rem;
-            animation: sparkleRotate 6s linear infinite reverse;
-            opacity: 0.5;
-        }
-        
-        @keyframes sparkleRotate {
-            0% { transform: rotate(0deg) scale(1); opacity: 0.6; }
-            25% { transform: rotate(90deg) scale(1.1); opacity: 0.8; }
-            50% { transform: rotate(180deg) scale(0.9); opacity: 0.4; }
-            75% { transform: rotate(270deg) scale(1.1); opacity: 0.7; }
-            100% { transform: rotate(360deg) scale(1); opacity: 0.6; }
-        }
 
         .grocery-list {
             list-style: none;
