@@ -304,57 +304,49 @@ function getAllGroceryCategories() {
     return groceryData.alwaysStocked;
 }
 
-function showGroceryList() {
-    const modal = document.getElementById('grocery-modal');
-    if (!modal) {
-        console.error('Grocery modal not found in DOM');
+function populateGroceryTab() {
+    const alwaysStockedContainer = document.getElementById('always-stocked-tab');
+    const weeklyContainer = document.getElementById('weekly-addons-tab');
+    
+    if (!alwaysStockedContainer || !weeklyContainer) {
+        console.error('Grocery tab containers not found in DOM');
         return;
     }
 
-    const alwaysStockedContainer = document.getElementById('always-stocked');
-    const weeklyContainer = document.getElementById('weekly-addons');
-
-    // Always stocked items
-    const alwaysStocked = getAllGroceryCategories();
-    alwaysStockedContainer.innerHTML = `
-        <div class="grocery-category">
-            <h4>🧵 Non-Perishables</h4>
-            <ul class="grocery-list">
-                ${alwaysStocked.nonPerishables.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-        </div>
-        <div class="grocery-category">
-            <h4>🍅 Common Perishables</h4>
-            <ul class="grocery-list">
-                ${alwaysStocked.commonPerishables.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-        </div>
-    `;
-
-    // Weekly add-ons
-    let weeklyHTML = '';
-    for (let week = 1; week <= 4; week++) {
-        const weeklyItems = getGroceryListForWeek(week);
-        weeklyHTML += `
-            <div class="grocery-week">
-                <h4>Week ${week}</h4>
+    // Always stocked items (only populate if empty)
+    if (!alwaysStockedContainer.innerHTML) {
+        const alwaysStocked = getAllGroceryCategories();
+        alwaysStockedContainer.innerHTML = `
+            <div class="grocery-category">
+                <h4>🧵 Non-Perishables</h4>
                 <ul class="grocery-list">
-                    ${weeklyItems.map(item => `<li>${item}</li>`).join('')}
+                    ${alwaysStocked.nonPerishables.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            </div>
+            <div class="grocery-category">
+                <h4>🍅 Common Perishables</h4>
+                <ul class="grocery-list">
+                    ${alwaysStocked.commonPerishables.map(item => `<li>${item}</li>`).join('')}
                 </ul>
             </div>
         `;
     }
-    weeklyContainer.innerHTML = weeklyHTML;
 
-    modal.classList.add('show');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeGroceryList() {
-    const modal = document.getElementById('grocery-modal');
-    if (modal) {
-        modal.classList.remove('show');
-        document.body.style.overflow = 'auto';
+    // Weekly add-ons (only populate if empty)
+    if (!weeklyContainer.innerHTML) {
+        let weeklyHTML = '';
+        for (let week = 1; week <= 4; week++) {
+            const weeklyItems = getGroceryListForWeek(week);
+            weeklyHTML += `
+                <div class="grocery-week">
+                    <h4>Week ${week}</h4>
+                    <ul class="grocery-list">
+                        ${weeklyItems.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+        weeklyContainer.innerHTML = weeklyHTML;
     }
 }
 
@@ -436,7 +428,6 @@ if (typeof module !== 'undefined' && module.exports) {
         renderGrid,
         showMealDetails,
         closeMealDetails,
-        showGroceryList,
-        closeGroceryList
+        populateGroceryTab
     };
 }
