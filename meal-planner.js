@@ -338,7 +338,10 @@ function showMealDetails(mealName) {
         prepNotes.parentElement.style.display = 'none';
     }
 
-    modal.classList.add('show');
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
     document.body.style.overflow = 'hidden';
 }
 
@@ -346,6 +349,9 @@ function closeMealDetails() {
     const modal = document.getElementById('meal-modal');
     if (modal) {
         modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
         document.body.style.overflow = 'auto';
     }
 }
