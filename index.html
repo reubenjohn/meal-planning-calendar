@@ -400,6 +400,76 @@
             gap: 20px;
         }
 
+        .lazy-recipes-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .lazy-recipes-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .lazy-recipes-section p {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .lazy-recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .lazy-recipe-card {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow-soft);
+            border-left: 4px solid var(--accent-green);
+            transition: all 0.2s ease;
+        }
+
+        .lazy-recipe-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-left-color: #68d391;
+        }
+
+        .lazy-recipe-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .prep-time {
+            background: var(--accent-green);
+            color: var(--text-primary);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .lazy-recipe-card p {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-size: 0.9rem;
+            margin: 0;
+            text-align: left;
+        }
+
         @media (max-width: 768px) {
             .main-grid {
                 grid-template-columns: 1fr;
@@ -426,6 +496,15 @@
             
             .weekly-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .lazy-recipes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .lazy-recipes-section {
+                margin-top: 30px;
+                padding: 20px;
             }
             
             body {
@@ -456,6 +535,61 @@
                 <div class="legend-item">
                     <div class="legend-color dinner"></div>
                     <span>Dinner</span>
+                </div>
+            </div>
+
+            <div class="lazy-recipes-section">
+                <h2>😴 Lazy Day Recipes</h2>
+                <p><em>Quick & easy meals requiring minimal or no cooking - perfect for busy days!</em></p>
+                
+                <div class="lazy-recipes-grid">
+                    <div class="lazy-recipe-card">
+                        <h3>🥚 Boiled Eggs</h3>
+                        <div class="prep-time">⏱️ 0-5 min prep</div>
+                        <p>Hard-boil eggs in advance (Sunday or Tuesday). Serve with salt, pepper, and a side of avocado or salad mix.</p>
+                    </div>
+
+                    <div class="lazy-recipe-card">
+                        <h3>🍓 Yogurt + Fruit</h3>
+                        <div class="prep-time">⏱️ 2 min prep</div>
+                        <p>Greek yogurt with fresh berries, banana slices, or any seasonal fruit. Add a drizzle of honey if desired.</p>
+                    </div>
+
+                    <div class="lazy-recipe-card">
+                        <h3>🥗 Salad Bowl</h3>
+                        <div class="prep-time">⏱️ 3-5 min prep</div>
+                        <p>Store-bought salad mix with leftover proteins (chicken, paneer), cherry tomatoes, cucumber, and simple dressing.</p>
+                    </div>
+
+                    <div class="lazy-recipe-card">
+                        <h3>🫓 Quick Wraps</h3>
+                        <div class="prep-time">⏱️ 3-5 min prep</div>
+                        <p>Whole wheat wraps filled with leftover proteins, salad mix, and sauces. Roll up and eat!</p>
+                    </div>
+
+                    <div class="lazy-recipe-card">
+                        <h3>🍛 Rice Bowls</h3>
+                        <div class="prep-time">⏱️ 2-3 min prep</div>
+                        <p>Pre-cooked rice (made in bulk) topped with leftover curries, shrimp, or dal. Microwave if needed.</p>
+                    </div>
+
+                    <div class="lazy-recipe-card">
+                        <h3>🥚 Egg Bowl</h3>
+                        <div class="prep-time">⏱️ 5 min prep</div>
+                        <p>Scrambled or boiled eggs over rice or with toast. Add soy sauce, sriracha, or simple seasonings.</p>
+                    </div>
+
+                    <div class="lazy-recipe-card">
+                        <h3>🥑 Avocado + Eggs</h3>
+                        <div class="prep-time">⏱️ 3 min prep</div>
+                        <p>Sliced avocado with boiled eggs, salt, pepper, and a squeeze of lemon. Eat with toast or alone.</p>
+                    </div>
+
+                    <div class="lazy-recipe-card">
+                        <h3>🍲 Leftover Curries</h3>
+                        <div class="prep-time">⏱️ 2-3 min reheat</div>
+                        <p>Dal, paneer curry, or any leftover curry from cook days. Serve with rice or eat as-is.</p>
+                    </div>
                 </div>
             </div>
         </div>
