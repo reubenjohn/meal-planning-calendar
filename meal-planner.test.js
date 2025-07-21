@@ -32,8 +32,8 @@ describe('getMealForDay function', () => {
     test('should return correct meal for valid week and day', () => {
         const meal = getMealForDay(1, 'Saturday');
         expect(meal).toEqual({
-            lunch: "🍗 Chicken",
-            dinner: "🍲 Dal",
+            lunch: "🍗 Spiced Roasted Chicken",
+            dinner: "🍲 Basic Indian Dal",
             cook: true
         });
     });
