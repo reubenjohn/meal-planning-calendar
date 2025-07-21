@@ -323,12 +323,16 @@ function showMealDetails(mealName) {
     title.textContent = mealName;
     cookTime.textContent = details.cookTime;
     ingredients.innerHTML = details.ingredients.map(ing => `<li>${ing}</li>`).join('');
-    instructions.textContent = details.instructions;
-    notes.textContent = details.notes;
+    
+    // Format instructions as numbered list with proper line breaks
+    const instructionSteps = details.instructions.split(/(?=\d+\.)/g).filter(step => step.trim());
+    instructions.innerHTML = `<ol class="instruction-steps">${instructionSteps.map(step => `<li>${step.replace(/^\d+\.\s*/, '')}</li>`).join('')}</ol>`;
+    
+    notes.innerHTML = `<div class="notes-content">${details.notes}</div>`;
     
     // Handle prep notes (may not exist for all recipes)
     if (prepNotes && details.prepNotes) {
-        prepNotes.textContent = details.prepNotes;
+        prepNotes.innerHTML = `<div class="prep-notes-content">${details.prepNotes}</div>`;
         prepNotes.parentElement.style.display = 'block';
     } else if (prepNotes) {
         prepNotes.parentElement.style.display = 'none';
